@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+
+    <cmp :pstr="str" @txtchagne="cmpTextChange" ></cmp>
+
+</div>
+
+
+<template id="cmp">
+    <div>
+        <h2>props: {{pstr}}</h2>
+        <h2>data: {{dstr}}</h2>
+        <input type="text" v-model="dstr">
+
+    </div>
+</template>
+
+<script src="../js/vue.js">
+</script>
+<script>
+
+    /**
+     这个案例有个坑, 或者注意点:
+
+     1. 在自定义组件内部, 一定不要去主动修改 props 的值,
+        因为props 是留给父组件去修改的, 因为你在自定义组件
+        内,修改了自己的 props 属性, 但是有可能父组件的修改所覆盖
+        所以, 组件内的props 属性, 是留给父组件来修改的
+     2. 如果组件内部的数据, 状态发生变化, 一般我们是修改自己内部的data 数据
+        ,再 $emit(事件名, value) 到父组件, 这样来达到修改子组件, 动态的影响父子组件的数据
+     */
+
+
+    const cmp  = {
+        template:'#cmp',
+        props:{
+             pstr:{
+                 type: String
+            }
+        },
+        data(){
+            return {
+                dstr:this.pstr
+            }
+        },
+        // 使用watch 可以监听data 中数据的改变
+        // 可以获取到 新值 和 旧值
+        watch:{
+            dstr(newValue, oldValue){
+                console.log('chagne');
+                this.$emit('txtchagne', newValue);
+            }
+        }
+    }
+
+    const app = new Vue({
+        el:'#app',
+        data:{
+            str:'str'
+        },
+        components:{
+            cmp
+        },
+        methods:{
+            cmpTextChange(value){
+                console.log('来了: ', value);
+                this.str = value
+
+                console.log('my  str: ', this.str);
+            }
+        }
+    })
+
+</script>
+</body>
+</html>
