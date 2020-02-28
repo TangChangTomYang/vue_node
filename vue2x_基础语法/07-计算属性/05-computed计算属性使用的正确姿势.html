@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+    <h2>{{fullname}}</h2>
+    <button @click="update">点击更新</button>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el:'#app',
+        data:{
+            firstname: 'zhang',
+            lastname:'san',
+            isUpdate:false
+        },
+        computed:{
+            fullname:{
+                get:function () {
+                    console.log('get 方法调用', this.isUpdate);
+                    return   this.isUpdate == false ?
+                            ('未更新: '+  this.firstname + ' ' + this.lastname) :
+                            ('已经更新 : '+  this.firstname + ' ' + this.lastname) ;
+                },
+                set:function (newValue) {
+                    console.log('set 方法调用');
+                    if(newValue){
+                        this.isUpdate = true;
+                    }
+                    else{
+                        this.isUpdate = false;
+                    }
+                }
+            }
+        },
+        methods:{
+            update:function () {
+                console.log('点击更新');
+                this.fullname = !this.isUpdate;
+            }
+        }
+    })
+
+//    计算属性, 只要是用来做一些, 数据设置时的内容给检测, 以及某个状态发生变化时想要做更多的事情
+
+</script>
+
+</body>
+</html>

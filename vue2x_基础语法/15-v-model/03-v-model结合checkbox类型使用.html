@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <!--v-mode 与 checkbox 结合使用, 单选的案例-->
+    <h2>你选择的性别是: {{isAgree}}</h2>
+    <label for="agree">同意</label>
+    <input type="checkbox"
+           name="sex"
+           id="agree"
+           value="isAgree"
+           v-model="isAgree">
+
+
+
+    <!--v-mode 与 checkbox 结合使用,  多选 的案例-->
+    <h2>你的多选结果是: {{lovers}}</h2>
+    <form action="https://baidu.com">
+
+
+    <label> <input type="checkbox" name="lvs" value="篮球" v-model='lovers'> 篮球</label>
+    <label> <input type="checkbox" name="lvs" value="足球" v-model='lovers'> 足球</label>
+    <label> <input type="checkbox" name="lvs" value="乒乓球" v-model='lovers'> 乒乓球</label>
+    <label> <input type="checkbox" name="lvs" value="羽毛球" v-model='lovers'> 羽毛球</label>
+        <input type="submit" value="提交">
+    </form>
+</div>
+<script  src="../js/vue.js"></script>
+<script>
+
+
+
+    const app =  new Vue({
+        el:'#app',
+        data:{
+            isAgree:true, // v-model 单选时为boolean
+            lovers:["篮球","足球","乒乓球","羽毛球"  ] // v-model 单选时为  数组 []
+        }
+
+    })
+</script>
+</body>
+</html>

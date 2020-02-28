@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .active{
+            color:red
+        }
+
+        .activeBgc{
+            background-color: pink;
+        }
+
+        .myHeight{
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+
+<div id="app" >
+    <!--
+     可以通过一个数组的形式动态绑定类
+    -->
+    <h2 class="myHeight" :class="[isActive,isBackbc]">{{msg}}</h2>
+    <!--可以通过一个方法, 返回一个对象-->
+    <h2 :class="getClass()">{{msg}}</h2>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app =  new Vue({
+        el:'#app',
+        data:{
+            msg:'v-bind 动态绑定 class' ,
+            activeCls:'active',
+            isActive:'activeBgc',
+            isBackbc:'active'
+
+        },
+        methods:{
+            getClass:function () {
+                return [this.isActive,this.isBackbc];
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+    <!--事件调用方法时, 没有参数-->
+    <button @click="clickfun">调动方法时省略()</button>
+    <button @click="clickfun()">调动方法有()</button>
+
+    <!--事件调用方法时省略的(). 但是方法本身有一个参数, 那么第一个参数默认是event-->
+    <button @click="clickfun_params">事件调用时省略(). 但是方法本身有参数</button>
+    <!--使用() 后, 参数是 undefined-->
+    <button @click="clickfun_params()">事件调用时省略(). 但是方法本身有参数</button>
+
+
+
+    <!--方法调用时, 我们需要event 对象 , 同时又需要其他的参数,
+    这时, 我们可以通过 $event 来表示传递的是浏览器event'对象-->
+    <button @click="click_event_params(num,$event)">$event 传递event对象, 其他变量是data中的变量</button>
+
+    <button @click="eventClick($event)">event click</button>
+</div>
+
+
+<script src="../js/vue.js">
+</script>
+<script>
+
+    /**
+
+     当methods 中定义方法, 以供@click调用时, 需要注意参数问题:
+     1. 如果该方法不需要额外参数, 那么方法后的() 可以省略
+        但是, 如果方法本身中有一个参数, 那么会默认将原生事件 event 参数传递进去
+
+     2. 固若需要同时传入某个参数, 同时需要event时, 可以通过 $event传入事件
+     */
+
+
+    /** v-on 绑定事件, 传递参数总结
+     1. 如果通过v-on绑定的事件, 调用的方法在定义时有参数, v-on在绑定事件时就明确的传递参数
+     2. 如果v-on 事件绑定的方法没有定义参数, 就省略
+     3. 如果v-on 事件绑定的方法需要传递浏览器的event参数, 那么就是用 $event 显示的传递参数
+     */
+
+    const app = new Vue({
+        el:'#app',
+        data:{
+            counter:0,
+            keycounter:0,
+            num : 100
+        },
+        methods:{
+            clickfun(){
+                console.log('clickfun click');
+            },
+            clickfun_params(abc){
+                console.log('clickfun_params--',abc);
+
+            },
+            click_event_params(num,event){
+                console.log(num, event);
+            },
+            eventClick(event){
+                console.log(event);
+            }
+        }
+    })
+
+
+
+//    如果在定义函数时有参数, 但是调用函数时没有传递参数, 那么这个参数为undefined
+    function  fun(num) {
+        console.log(num);
+    }
+    fun();
+</script>
+</body>
+</html>

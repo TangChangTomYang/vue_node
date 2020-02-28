@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--
+    v-if    v-else  v-else-if
+    这三个指令和javaScript 中的
+    if  else   和 else if 等价
+
+    vue 的条件指令可以更具表达式的值, 在DOM中渲染或者销毁元素或者组件
+
+    -->
+
+    <h2 v-if="score >= 90"> 优秀</h2>
+    <h2 v-else-if="score >= 80"> 良 </h2>
+    <h2 v-else-if="score >= 60"> 及格 </h2>
+    <h2 v-else> 不及格 </h2>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            score:80
+        }
+    })
+</script>
+</body>
+</html>

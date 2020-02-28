@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{msg}}</h2>
+
+    <h2>input: {{inputTxt}}</h2>
+    <form action="https://baidu.com">
+        <!--这样, 就在input标签与msg之间形成了双向绑定-->
+        <input type="text" v-model="msg" name="info">
+
+
+
+        <input type="submit">
+
+    </form>
+
+
+    <button @click="btnClick($event)">dianji </button>
+
+    <!--input 元素有一个input事件, 用于监听用户 输入的内容-->
+    <input type="text"   @input="changeInput($event)">
+
+</div>
+<script  src="../js/vue.js"></script>
+<script>
+
+
+    /**
+     表单绑定 v-model
+
+     1. 表单控件在实际开发过程中是非常常见的,特别是对于用户信息提交, 需要大量的表单
+
+     */
+
+
+    const app =  new Vue({
+        el:'#app',
+        data:{
+            msg:'fasdfa',
+            inputTxt:''
+
+        },
+        methods:{
+            changeInput(event){
+                console.log(event.target.value);
+                this.inputTxt = event.target.value
+            },
+            btnClick(event){
+                console.log(event);
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

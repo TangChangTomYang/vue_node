@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <!--
+
+    每个计算属性, 都包含一个getter 和一个setter
+
+    通常, 我们都会使用计算属性的getter来读
+    在某些情况下也会提供一个setter方法(不常用)
+    -->
+
+    <!--计算属性 读-->
+    <h2>{{fullname}}</h2>
+
+    <button @click="">点击设置全名</button>
+
+
+
+</div>
+<script src="../js/vue.js">
+</script>
+<script>
+
+    const app = new Vue({
+        el:'#app',
+        data:{
+            firstname:'zhang',
+            lastname:'san'
+        },
+        // 计算属性
+        // 计算属性和methods 虽然都是方法实现, 但是是有差异的
+        // 计算属性只会调用一次, 性能 要高一些, 而方法每次调用都会执行一次
+        // 因为计算属性有缓存, 调用多次时, 只计算一次
+        computed:{
+            fullname:{
+                get:function() {
+                    console.log('调用了 get');
+                    return this.firstname + ' ' + this.lastname
+                },
+
+                set:function (newValue) {
+                    console.log('调用了 set');
+                    const names = newValue.split(' ')
+                    this.firstname = names[0]
+                    this.lastname = names[1]
+
+                }
+
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

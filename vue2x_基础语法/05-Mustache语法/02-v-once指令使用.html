@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+    <h2>{{msg}}</h2>
+    <h2>{{msg}}</h2>
+    <!--只要在标签里面设置了 v-once , 那么标签 中的data数据赋初值后就不会改变了-->
+    <h2 v-once>{{msg}}</h2>
+    <button @click="change">点击change</button>
+
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    const app =  new Vue({
+        el:'#app',
+        data:{
+            msg:' 你 好  啊, mustache',
+        },
+        methods:{
+            change:function(){
+                this.msg = '测试 v-once 指令'
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

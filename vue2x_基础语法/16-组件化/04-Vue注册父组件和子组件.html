@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        div{
+            border: 1px solid #000;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <cmp></cmp>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+
+
+    //1. 注册组件构造器1 (子组件)
+    const cmp_child = Vue.extend({
+        template:`
+            <div>
+                <h2>我是子组件</h2>
+                <p>我是子组件的内容</p>
+                <my_cmp></my_cmp>
+            </div>
+        `
+    })
+
+    //2. 注册组件构造器2 (父组件)
+    // 在组价内注册组件, 就形成了父子组件关系
+    const cmp = Vue.extend({
+        template:`
+            <div>
+                <h2>我是父标题</h2>
+                <p>我是父组件的内容</p>
+                <cmp_child></cmp_child>
+            </div>
+        `,
+        // 在组件构造器2内注册组件1
+        components:{
+            cmp_child: cmp_child  // my_cmp1 组件就是子组件
+        }
+    })
+
+
+    const app  = new Vue({ // 其实, Vue实例也是可以看成一个组件的.
+        el:'#app',
+        data:{
+
+        },
+        components:{ // 注册父组件
+            cmp:cmp
+
+        },
+        computed:{
+
+        },
+        methods:{
+
+        }
+
+    })
+</script>
+</body>
+</html>

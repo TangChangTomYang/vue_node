@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .box{
+            border: 1px solid #000;
+
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <!--组件的一般使用-->
+    <cmp></cmp>
+
+
+    <h2>-----------------</h2>
+
+    <!--使用  作用域插槽-->
+    <cmp>
+        <!--目的是获取子组件中的languages (即,获取组件插槽中的数据)
+            在 vue2.5 以下, 必须使用template 模板, 在2.5之后你可以使用其它标签, 比如: div
+        -->
+        <template slot-scope="slot">
+            <button v-for="item in slot.data"> 课程:  {{item}}</button>
+        </template>
+    </cmp>
+
+
+    <h2>--在vue2.5之后, 使用作用域插槽时, 可以不再使用template标签获取插槽, 其它标签都可以---------------</h2>
+
+    <!--使用  作用域插槽-->
+    <cmp>
+        <!--目的是获取子组件中的languages (即,获取组件插槽中的数据)
+            在 vue2.5 以下, 必须使用template 模板, 在2.5之后你可以使用其它标签, 比如: div
+        -->
+        <div class="box" slot-scope="slot">
+            <button v-for="item in slot.data"> 课程: * {{item}} *</button>
+        </div>
+    </cmp>
+
+
+</div>
+
+
+<template id="cmp">
+    <div>
+
+        <!--<slot name="abc"></slot> 给插槽取名子称为具名插槽 -->
+
+        <!--使用插槽绑定组件内部的数据, 供外部使用
+            (给插槽绑定一个属性(data 名字可以随意去)来引用组件内部的数据,
+            这样外部就可以拿到插槽, 从而通过插槽的属性(data)拿到数据, 然后显示 )
+        -->
+        <slot :data="languages">
+            <!--在插槽内提供默认展示的内容, 外面没有插入组件, 就显示这个默认内容-->
+            <ul>
+                <li v-for="(item, index) in languages">{{index}} ,{{item}}</li>
+            </ul>
+        </slot>
+
+    </div>
+</template>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    /** 作用域插槽 介绍:
+
+     作用域插槽时slot一个比较难理解的点,而且官方说的也不是很清楚.
+     这里我们自己总结了以下:
+
+     1. 父组件替换插槽的标签, 但是内容由子组件来提供.
+        (也可以理解为: 父组件提供替换插槽的标签(告诉插槽用什么组件显示), 子组件提供要显示的数据内容,
+        即: 父组件决定怎么显示, 子组件提供要先什么的内容, 和一般组件使用刚好反着的)
+
+     我们以一个案例来说明:   (这个也是作用域插槽的使用场景)
+
+     a. 子组件包含一组数据, 比如: languages:['c语言', 'objective-c', 'swift', 'go']
+     b. 需要在多个界面中展示:
+        b.1 某些界面以水平方向展示
+        b.2 某些界面以列表形式展示
+        b.3 某些界面直接展示一个数组
+     c. 内容在子组件, 希望父组件告诉我们怎么展示, 怎么办?
+        答案: 利用作用域插槽即可实现
+
+     */
+
+    /** 作用域插槽的使用步骤
+
+     1. 自定义, 组件
+     2. 在组件内提供data数据
+     3. 在自定义组件内 定义插槽,
+        并在插槽内 使用自定义的属性名(名字任意写) 绑定组件内部提供的数据
+     4. 在外面使用 template 标签引用自定义组件内的插槽
+     5. 在template标签内提供要插入, 插槽的组件, 数据由template 绑定的插槽提供
+
+     */
+
+
+
+    // 定义自定义组件 (作用域插槽)
+    const cmp = {
+        template:'#cmp',
+        data(){
+            return {
+                languages:['c语言', 'objective-c', 'swift', 'go']
+            }
+        }
+    }
+
+    const  app = new Vue({
+        el:'#app',
+        data:{
+
+        },
+        // 注册组件
+        components:{
+            cmp
+        }
+    })
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .actived{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <ul>
+        <li v-for="(item, index) in names"
+            :key="item"
+            @click="currentIndex=index"
+            :class="{actived: index==currentIndex }">
+            {{item}}
+        </li>
+    </ul>
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app =  new Vue({
+        el:'#app',
+        data:{
+            names:['向三 ', '李四', '网二', '麻子'],
+            currentIndex : 1
+        }
+    })
+</script>
+
+</body>
+</html>

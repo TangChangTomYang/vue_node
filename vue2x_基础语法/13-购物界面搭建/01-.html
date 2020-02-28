@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <table>
+        <thead>
+            <tr>
+                <th>NO:</th>
+                <th>书籍名称</th>
+                <th>出版日子</th>
+                <th>价格(方法格式化)</th>
+                <th>价格(过滤器格式化)</th>
+                <th>购买日期</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(item, index) in  items" :key="JSON.stringify(item)">
+
+                <th>{{index}}</th>
+                <th>{{item.name}}</th>
+                <th>{{item.pubdate}}</th>
+                <!--格式化价格 方式1: 方法处理-->
+                <th>{{getFormatPrice(item.price)}}</th>
+                方式二 : 过滤器, 参数  | 过滤器
+                <th>{{item.price | formatPrice}}</th>
+                <th>
+                    <button @click="saleCountMinus(item)" :disabled="item.saleCount<=1">-</button>
+                    {{item.saleCount}}
+                    <button @click="saleCountPlus(item)">+</button>
+                </th>
+                <th><button @click="deleteClick(item)" >移除</button></th>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<script src="../js/vue.js"></script>
+<script src="./js.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <ul>
+        <!--绑定key, 最好不要用索引来绑定-->
+        <li v-for="item in names" :key="item">{{item}}</li>
+    </ul>
+
+    <button @click="insertTo">点击, 在2号位插入元素</button>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+
+    /**
+     数组的key属性  (input标签的key)
+
+     1. 官方推荐我们在使用v-for时, 给对应的元素或组件添加一个key属性
+
+        为什么需要这个key属性呢?
+            这个其实和Vue的虚拟DOM的Diff算法有关系
+            当我们给某一层很过相似的节点时, 也就是列表节点时, 我们希望插入一个 新节点
+     li1 -> A
+     li2 -> B
+     li3 -> c
+     li3 -> D
+     li4 -> E
+     我们希望在B和C之间加一个F, Diff算法默认执行起来是这样的.
+        即: 把C更新成F,D更新成C,E更新成D,最后再插入E, 是不是效率很低
+     所以,我们需要使用key来给每个节点做一个唯一 标识
+        diff算法就可以 正确的识别此节点
+        找到正确的位置区插入新的节点
+     所以, 一句话, key的作用主要是为了高效的更新虚拟DOM
+
+     */
+
+    const  app =  new Vue({
+        el:'#app',
+        data:{
+            names:['张三', '李四', '网二','麻子']
+        },
+        methods:{
+            insertTo(){
+                this.names.splice(2,0,'赵柳')
+            }
+        }
+
+
+    })
+
+</script>
+</body>
+</html>

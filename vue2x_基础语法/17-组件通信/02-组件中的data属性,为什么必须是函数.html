@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            border: 1px solid #000;
+            background: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <cmp></cmp>
+    <cmp></cmp>
+    <cmp></cmp>
+</div>
+
+
+
+<template id="cmp">
+
+    <div class="box">
+        <h2>当前计数: {{count}}</h2>
+        <button @click="add">+</button>
+        <button @click="minus">-</button>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+
+
+    /**
+     为甚么组件内的data 属性必须为 函数类型, 且返回值 必须是对象呢?
+
+     答:
+        因为, 同一个类型的组件, 可能有多个组件实例, 多个组件实例之间各自有各自的data数据,
+        为了保证每个组件实例的data属性是单独的, 需要是方法的返回值
+     */
+
+    Vue.component('cmp',{
+        template:'#cmp',
+        data(){
+          return {
+              count:0
+          }
+        },
+        methods:{
+            add(){
+                this.count++
+            },
+            minus(){
+                this.count--
+            }
+        }
+    })
+
+    const app = new Vue({
+        el:'#app',
+        data:{
+
+        }
+    })
+</script>
+
+</body>
+</html>
