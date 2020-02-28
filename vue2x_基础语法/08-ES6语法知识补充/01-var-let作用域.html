@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <button>点我: 1</button>
+    <button>点我: 2</button>
+    <button>点我: 3</button>
+    <button>点我: 4</button>
+    <button>点我: 5</button>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+
+    /** let/ var
+
+     1. 事实上, var的设计可以看成是 javaScript 语法上的设计错误
+     2. 块级作用域:
+        2.1 JS 中, 使用var 来声明一个变量时, 变量的作用域主要和函数的定义有关
+        2.2 针对其他定义来说, 没有作用域, 比如: if/for 等, 这在我们开发中往往会引起一些问题
+
+     * @type {any}
+     */
+
+    var btns = document.getElementsByTagName('button')
+
+//    for(var i = 0; i < btns.length; i++){
+//        btns[i].addEventListener('click',function () {
+//            console.log('第' + i + '个按钮被点击了');
+//        })
+//    }
+
+
+    for(var i = 0; i < btns.length; i++){
+
+        // 在ES5中解决 变量作用域的问题, 就是使用一个函数把它包裹起来
+        // 然后在把这个函数 使用 () 包裹起来, 在使用参数调用
+        // 这种方式称为 闭包
+
+
+        // 为甚么在ES5中闭包可以解决变量作用域的问题, 因为函数是一个作用域
+        (function (j) {
+            btns[i].addEventListener('click',function () {
+                console.log('第' + j + '个按钮被点击了');
+            })
+        })(i)
+
+
+    }
+
+
+//    const app = new Vue({
+//        el:'#app',
+//        data:{
+//
+//        }
+//    })
+</script>
+
+</body>
+</html>
