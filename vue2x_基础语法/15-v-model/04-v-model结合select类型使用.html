@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <!--select 单选案例-->
+    <h2>你选择的是: {{sguo}}</h2>
+    <form action="https://baidu.com">
+        <select name="shuiguo"  v-model="sguo"  >
+            <option value="苹果"  >苹果</option>
+            <option value="香蕉"  >香蕉</option>
+            <option value="葡萄"  >葡萄</option>
+            <option value="芒果"  >芒果</option>
+            <option value="梨子"  >梨子</option>
+
+        </select>
+        <input type="submit" value="提交啦">
+    </form>
+
+
+    <!--select 多选 案例-->
+    <h2>你多选择的是: {{sguoArr}}</h2>
+    <form action="https://baidu.com">
+        <select name="shuiguo"  v-model="sguoArr" multiple >
+            <option value="苹果"  >苹果</option>
+            <option value="香蕉"  >香蕉</option>
+            <option value="葡萄"  >葡萄</option>
+            <option value="芒果"  >芒果</option>
+            <option value="梨子"  >梨子</option>
+
+        </select>
+        <input type="submit" value="提交啦">
+    </form>
+
+</div>
+<script  src="../js/vue.js"></script>
+<script>
+
+
+
+    const app =  new Vue({
+        el:'#app',
+        data:{
+            sguo:'梨子',
+            sguoArr:['苹果']
+
+        }
+
+    })
+</script>
+</body>
+</html>

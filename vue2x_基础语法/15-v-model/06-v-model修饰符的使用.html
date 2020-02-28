@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            background-color: pink;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="app">
+        <div class="box">
+            <h2>{{msg}}</h2>
+            <input type="text" v-model="msg">
+        </div>
+        <!--lazy 修饰符, 当回车或者失去焦点时 生效-->
+        <div class="box">
+            <input type="text" v-model.lazy="msgLazy">
+            <h2>{{msgLazy}}</h2>
+        </div>
+
+        <!--.number 修饰符-->
+        <div class="box">
+            <input type="number" v-model.number="msgNumber">
+            <h2>{{msgNumber}}</h2>
+        </div>
+
+        <!--trim 修饰符-->
+        <div class="box">
+            <input type="text" v-model.trim="msgTrim">
+            <h2>{{msgTrim}}</h2>
+        </div>
+    </div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    /** 修饰符
+
+     1. lazy 修饰符
+        1.1 默认情况下, v-modal默认是在input事件中同步输入框的内容的
+        1.2 也就是说, 一旦有数据发生改变对应的data中的数据就会自动发生
+        1.3 lazy 修饰符可以让数据在失去焦点或者回车时才会更新.
+
+
+     2. number修饰符
+        2.1 默认情况下, 在输入框中无论我们输入的是 字母还是数字, 都会被当前字符串类型来处理.
+        2.2 但是,如果我们希望处理的是数字类型, 那么最好直接将内容当做数字处理
+        2.3 number修饰符,可以让 在输入框中 输入的内容自动转换 成数字类型
+
+     3. trim修饰符
+        3.1 如果输入的内容收尾都有很多的空格, 通常我们希望将其去除
+        3.2 trim 修饰符可以过滤内容 左右两边的空格.
+
+
+
+
+
+     */
+
+
+
+    const app = new Vue({
+        el:'#app',
+        data:{
+            msg:'xiaoxi',
+            msgLazy:'xiaoxi',
+            msgNumber:18,
+            msgTrim:'   sdfsdf  '
+        }
+    })
+
+</script>
+
+</body>
+</html>
