@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+
+<!--普通方式 通过script直接导入 js文件, 会出现命名冲突, 如下:
+<script src="02-aaa.js"></script>
+<script src="03-bbb.js"></script>
+-->
+
+<!--为了避免直接通过 script 导入js文件产生命名冲突,
+我们可以在script标签中增加 type = 'module' 属性,
+添加了 type='module'后 的导入表示按照模块化的方式导入, 一个模块就是
+ 一个单独的作用域, 有自己独立的命名空间, 不会出现 命名冲突.
+ 如下:  -->
+
+<script src="02-aaa.js" type="module"></script>
+<script src="03-bbb.js" type="module"></script>
+<script src="04-test.js" type="module"></script>
+<script src="05-test2.js" type="module"></script>
+<script src="06-exportDefault-daochu.js" type="module"></script>
+<script src="07-exportDefault-daoru.js" type="module"></script>
+
+</body>
+</html>
