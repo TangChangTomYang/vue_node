@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .active{
+            color:red
+        }
+
+        .activeBgc{
+            background-color: pink;
+        }
+
+        .myHeight{
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+
+<div id="app" >
+    <!--方式1-->
+ 👌<h2 :class="activeCls">{{msg}}</h2>
+
+    <!--方式2
+    当类名1 对应的value为真时, 有效, 否则没有这个类
+    <h2 :class="{类名1:true, 类名2:false}">{{msg}}</h2>
+    这样的话, 就可应很方便的通过一个bool 值来控制标签的属性
+    -->
+    <h2 class="myHeight" :class="{activeBgc:isActive,active:isActive }">{{msg}}</h2>
+    <!--可以通过一个方法, 返回一个对象-->
+    <h2 :class="getClass()">{{msg}}</h2>
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app =  new Vue({
+        el:'#app',
+        data:{
+            msg:'v-bind 动态绑定 class' ,
+            activeCls:'active',
+            isActive:true,
+            isBackbc:true
+
+        },
+        methods:{
+            getClass:function () {
+                return {activeBgc:this.isActive,active:this.isActive }
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
