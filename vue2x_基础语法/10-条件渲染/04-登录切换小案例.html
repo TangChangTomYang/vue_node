@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+
+    <!--条件渲染案例
+     v-if
+     v-else-if
+     v-else
+    -->
+
+    <!--
+    v-if 的原理
+    当v-if后面的条件为false时, 对应的元素以及其子元素不会渲染
+    -->
+
+
+    <span v-if="isUserMail">
+       <label for="email">用户邮箱</label><input type="text" id="email">
+   </span>
+    <span v-else >
+       <label for="iphone">用户手机</label><input type="text" id="iphone">
+   </span>
+    <button @click="changeAccountType">{{userChoose}}</button>
+
+</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            isUserMail: true
+        },
+        computed:{
+            userChoose(){
+                if(this.isUserMail == true){
+                    return '用户电话'
+                }
+                return '用户手机'
+            }
+
+        },
+        methods:{
+            changeAccountType(){
+                this.isUserMail = !this.isUserMail;
+            }
+        }
+    })
+</script>
+</body>
+</html>
