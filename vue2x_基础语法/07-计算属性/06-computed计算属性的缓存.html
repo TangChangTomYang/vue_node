@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+    <h2>{{fullname}}</h2>
+    <h2>{{fullname}}</h2>
+    <h2>{{fullname}}</h2>
+
+    <h2>{{fetchFullname()}}</h2>
+    <h2>{{fetchFullname()}}</h2>
+    <h2>{{fetchFullname()}}</h2>
+
+
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el:'#app',
+        data:{
+            firstname: 'zhang',
+            lastname:'san',
+        },
+        computed:{
+
+            // 计算属性是由缓存的, 通过只会被调用一次
+            // 只要计算属性的值, 不变, 就会一直使用缓存数据, 直到数据变化后才更新缓存调用计算属性的get
+            fullname:function () {
+                console.log('计算属性被调用了');
+                return this.firstname + ' ' + this.lastname
+            }
+
+
+
+        },
+        methods:{
+            fetchFullname:function () {
+                console.log('方法被调用了');
+                return '方法:' + this.firstname + ' ' + this.lastname
+            }
+        }
+    })
+
+//    计算属性, 只要是用来做一些, 数据设置时的内容给检测, 以及某个状态发生变化时想要做更多的事情
+
+</script>
+
+</body>
+</html>

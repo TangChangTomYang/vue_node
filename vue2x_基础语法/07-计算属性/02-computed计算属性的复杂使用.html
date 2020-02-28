@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+    <!--计算属性-->
+    <h2>总价格: {{totalPrice}}</h2>
+
+
+
+</div>
+<script src="../js/vue.js">
+</script>
+<script>
+
+    const app = new Vue({
+        el:'#app',
+        data:{
+            books:[
+                {name:'c语言', price: 100},
+                {name:'oc', price: 120},
+                {name:'java', price: 130},
+                {name:'c#', price: 80},
+            ]
+        },
+        // 计算属性
+        // 计算属性和methods 虽然都是方法实现, 但是是有差异的
+        // 计算属性只会调用一次, 性能 要高一些, 而方法每次调用都会执行一次
+        computed:{
+            totalPrice:function () {
+                let  total =  0;
+
+                // 遍历方式 1
+//                for (let i =0; i < this.books.length; i++){
+//                    total = total + this.books[i].price
+//                }
+
+                // 遍历方式2
+                for (let i in this.books){
+                    total = total + this.books[i].price
+                }
+
+                // 遍历方式3
+//                for (let book  of this.books){
+//                    total = total + book.price
+//                }
+
+                return total;
+            }
+        },
+        // 方法
+        methods:{
+            getFullName:function () {
+                return this.firstname + ' ' + this.lastname
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
